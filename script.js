@@ -40,10 +40,25 @@ const alphabets = [
     'Symbol10026.png'
 ];
 
-//set score
 let i = 0;
 
-function setupBalloon(balloon,x,y) {
+// Function to preload images
+function preloadImages(imageArray, folder) {
+    const preloadedImages = [];
+    imageArray.forEach(image => {
+        const img = new Image();
+        img.src = `assets/${folder}/${image}`;
+        preloadedImages.push(img);
+    });
+    return preloadedImages;
+}
+
+// Preload balloon and alphabet images
+const preloadedBalloonImages = preloadImages(balloonImages, 'balloonsImg');
+const preloadedAlphabetImages = preloadImages(alphabets, 'alphabets');
+
+
+function setupBalloon(balloon, x, y) {
     // Randomly select an image for each balloon
     const randomIndex = Math.floor(Math.random() * balloonImages.length);
     const randomImage = balloonImages[randomIndex];
@@ -112,8 +127,8 @@ function setupBalloon(balloon,x,y) {
 
         // Stop the animation
         cancelAnimationFrame(animationFrameId);
-        //score
-        i += 1
+        // Update score
+        i += 1;
         document.getElementById("score").innerText = i;
         setTimeout(() => {
             balloon.remove();
@@ -123,7 +138,7 @@ function setupBalloon(balloon,x,y) {
 
 // Apply setup to all existing balloons
 document.querySelectorAll('#balloon').forEach(balloon => {
-    setupBalloon(balloon,50,50);
+    setupBalloon(balloon, 50, 50);
 });
 
 // Event listener to create new balloons on click
@@ -135,5 +150,5 @@ space.addEventListener("click", (event) => {
     document.body.appendChild(createBalloon);
     
     // Apply setup to the new balloon
-    setupBalloon(createBalloon,event.clientX,event.clientY);
+    setupBalloon(createBalloon, event.clientX, event.clientY);
 });
