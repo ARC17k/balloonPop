@@ -154,12 +154,17 @@ space.addEventListener("click", (event) => {
 });
 
 const cursor = document.getElementById("cursor");
-window.addEventListener('mousemove', (event) => {
-    cursor.style.top = event.clientY+"px";
-    cursor.style.left = event.clientX+"px";
-    // cursor.style.translate = "-50% -50%";
-
-})
+document.onpointermove = (event) => {
+    const { clientX, clientY } = event;
+  
+    cursor.animate(
+      {
+        left: `${clientX}px`,
+        top: `${clientY}px`
+      },
+      { duration: 700, fill: "forwards" }
+    );
+  };
 
 window.addEventListener("mouseout", (event) =>{
     cursor.style.display = "none";
