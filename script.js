@@ -162,7 +162,7 @@ document.onpointermove = (event) => {
         left: `${clientX}px`,
         top: `${clientY}px`
       },
-      { duration: 700, fill: "forwards" }
+      { duration: 700, fill: "forwards", easing: "ease-in-out"}
     );
   };
 
